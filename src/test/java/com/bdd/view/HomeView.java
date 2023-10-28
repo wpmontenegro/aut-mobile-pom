@@ -1,6 +1,7 @@
 package com.bdd.view;
 
 import com.mobile.integrations.MobileBase;
+import org.openqa.selenium.By;
 
 import static com.mobile.integrations.MobileDriverManager.*;
 
@@ -11,9 +12,9 @@ public class HomeView extends MobileBase {
 
     public void tapProduct(String productName) {
         if (isAndroid()) {
-            getDriver().findElementByXPath(String.format(XPATH_PRODUCT_ANDROID, productName)).click();
+            getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_ANDROID, productName))).click();
         } else if (isIOS()) {
-            getDriver().findElementByXPath(String.format(XPATH_PRODUCT_IOS, productName)).click();
+            getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_IOS, productName))).click();
         }
     }
 }
