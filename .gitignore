@@ -1,0 +1,14 @@
+### Report and local ###
+target
+app
+.DS_Store
+*.DS_Store
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
