@@ -1,4 +1,4 @@
-package com.mobile.integrations;
+package com.mobile.integrations.driver;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.util.MobileProperties;
@@ -6,6 +6,9 @@ import io.appium.java_client.remote.options.BaseOptions;
 
 import java.util.Set;
 
+import static com.mobile.integrations.driver.BrowserStackDriver.isActiveBrowserStack;
+import static com.mobile.integrations.driver.BrowserStackDriver.setBrowserStackDriver;
+import static com.mobile.integrations.driver.DefaultDriver.setDefaultDriver;
 import static com.mobile.util.Constants.*;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
@@ -13,41 +16,50 @@ import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 import static io.appium.java_client.remote.MobilePlatform.IOS;
 
 public class Capabilities {
-
-    private static final String DRIVER_SUFFIX = "mobiledriver.%s";
-    private static final String IMPLICIT_WAIT_PROPERTY = "implicitWaitOnSeconds";
-    private static final String HUB_PROPERTY = "hub";
-    private final MobileProperties properties;
-    private final String platform = PLATFORM.toLowerCase();
+    private static String appiumHub;
+    private static Long implicitWaitOnSeconds;
 
     public Capabilities() {
-        properties = new MobileProperties();
-        properties.loadProperties(PROPERTIES_DEFAULT_NAME);
-
-        if (platform.equalsIgnoreCase(ANDROID) || platform.equalsIgnoreCase(IOS)){
-            properties.loadProperties(platform);
-        } else {
-            throw new AutomationException("Plataforma mobile inválida o no soportada");
-        }
+        MobileProperties.loadAllProperties();
     }
 
     public long getImplicitWaitOnSeconds() {
-        return Long.parseLong(properties.getPropertyValue(String.format(DRIVER_SUFFIX, IMPLICIT_WAIT_PROPERTY)));
+        return implicitWaitOnSeconds;
     }
 
     public String getAppiumHub() {
-        return properties.getPropertyValue(String.format(DRIVER_SUFFIX, HUB_PROPERTY));
+        return appiumHub;
+    }
+
+    public static void setAppiumHub(String hub) {
+        appiumHub = hub;
+    }
+
+    public static void setImplicitWaitOnSeconds(Long seconds) {
+        implicitWaitOnSeconds = seconds;
     }
 
     public BaseOptions<?> loadAppiumOptions() {
+        BaseOptions<?> options = initializeBaseOptions();
+        setPlatformSpecificCapabilities(options);
+        setDefaultDriver();
+        if(isActiveBrowserStack()) setBrowserStackDriver(options);
+        return options;
+    }
+
+    private BaseOptions<?> initializeBaseOptions() {
         BaseOptions<?> options = new BaseOptions<>();
-        Set<String> propertyNames = properties.getProperty().stringPropertyNames();
+        Set<String> propertyNames = MobileProperties.getPropertyNames();
         for (String propertyName : propertyNames) {
             if (propertyName.startsWith(APPIUM_SUFFIX)) {
-                options.setCapability(propertyName.replace(APPIUM_SUFFIX, EMPTY), properties.getPropertyValue(propertyName));
+                options.setCapability(propertyName.replace(APPIUM_SUFFIX, EMPTY), MobileProperties.getPropertyValue(propertyName));
             }
         }
+        return options;
+    }
 
+    private void setPlatformSpecificCapabilities(BaseOptions<?> options) {
+        String platform = PLATFORM.toLowerCase();
         if (platform.equalsIgnoreCase(ANDROID)) {
             options.setCapability("automationName", ANDROID_UIAUTOMATOR2);
             options.setCapability("platformName", ANDROID);
@@ -57,6 +69,5 @@ public class Capabilities {
         } else {
             throw new AutomationException("Plataforma mobile no soportada");
         }
-        return options;
     }
 }

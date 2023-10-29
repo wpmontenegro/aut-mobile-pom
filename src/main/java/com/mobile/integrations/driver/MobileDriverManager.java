@@ -1,4 +1,4 @@
-package com.mobile.integrations;
+package com.mobile.integrations.driver;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.logs.AutomationLogger;
@@ -27,8 +27,9 @@ public class MobileDriverManager {
         BaseOptions<?> options = capabilities.loadAppiumOptions();
         AutomationLogger.logInfo("Automatización corriendo en {0}", PLATFORM.toUpperCase(Locale.ROOT));
 
+        String url = capabilities.getAppiumHub();
         try {
-            driver = new AppiumDriver(new URL(capabilities.getAppiumHub()), options);
+            driver = new AppiumDriver(new URL(url), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(capabilities.getImplicitWaitOnSeconds()));
         } catch (Exception exception) {
             throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);

@@ -1,7 +1,7 @@
 package com.bdd.glue;
 
 import com.bdd.step.DemoAppStep;
-import com.mobile.integrations.MobileDriverManager;
+import com.mobile.integrations.driver.MobileDriverManager;
 import com.mobile.util.ScreenShoot;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;

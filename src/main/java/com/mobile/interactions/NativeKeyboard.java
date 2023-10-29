@@ -5,8 +5,8 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 
-import static com.mobile.integrations.MobileDriverManager.getDriver;
-import static com.mobile.integrations.MobileDriverManager.isAndroid;
+import static com.mobile.integrations.driver.MobileDriverManager.getDriver;
+import static com.mobile.integrations.driver.MobileDriverManager.isAndroid;
 
 public class NativeKeyboard {
     private static final String XPATH_IOS = "//XCUIElementTypeKey[@name='%s']";
