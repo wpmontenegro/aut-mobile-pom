@@ -1,8 +1,9 @@
 package com.mobile.integrations.driver;
 
 import com.mobile.exceptions.AutomationException;
-import com.mobile.util.MobileProperties;
+import com.mobile.util.BrowserStackDevices;
 import io.appium.java_client.remote.options.BaseOptions;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.util.Constants.BS_SUFFIX;
 import static com.mobile.util.Constants.EMPTY;
 import static com.mobile.util.MobileProperties.getPropertyNames;
+import static com.mobile.util.MobileProperties.getPropertyValue;
 
 public class BrowserStackDriver {
     private static final String BROWSERSTACK_FORMAT = "browserstack.%s";
@@ -26,17 +28,17 @@ public class BrowserStackDriver {
     }
 
     public static String getUser() {
-        String userFromProperties = MobileProperties.getPropertyValue(String.format(BROWSERSTACK_FORMAT, "user"));
+        String userFromProperties = getPropertyValue(String.format(BROWSERSTACK_FORMAT, "user"));
         return System.getenv("BROWSERSTACK_USER") != null ? System.getenv("BROWSERSTACK_USER") : userFromProperties;
     }
 
     private static String getAccessKey() {
-        String keyFromProperties = MobileProperties.getPropertyValue(String.format(BROWSERSTACK_FORMAT, "key"));
-        return System.getenv("BROWSERSTACK_KEY") != null ? System.getenv("BROWSERSTACK_KEY"): keyFromProperties;
+        String keyFromProperties = getPropertyValue(String.format(BROWSERSTACK_FORMAT, "key"));
+        return System.getenv("BROWSERSTACK_KEY") != null ? System.getenv("BROWSERSTACK_KEY") : keyFromProperties;
     }
 
     public static boolean isActiveBrowserStack() {
-        return MobileProperties.getPropertyValue(String.format(BROWSERSTACK_FORMAT, "active")).equalsIgnoreCase("true");
+        return getPropertyValue(String.format(BROWSERSTACK_FORMAT, "active")).equalsIgnoreCase("true");
     }
 
     public static void setBrowserStackDriver(BaseOptions<?> options) {
@@ -44,11 +46,18 @@ public class BrowserStackDriver {
         Set<String> propertyNames = getPropertyNames();
         for (String propertyName : propertyNames) {
             if (propertyName.startsWith(BS_SUFFIX)) {
-                options.setCapability(propertyName.replace(BS_SUFFIX, EMPTY), MobileProperties.getPropertyValue(propertyName));
+                options.setCapability(propertyName.replace(BS_SUFFIX, EMPTY), getPropertyValue(propertyName));
             }
         }
         options.setCapability(BUILD_NAME, System.getProperty(BUILD_NAME));
         options.setCapability(PROJECT_NAME, System.getProperty(PROJECT_NAME));
         options.setCapability(APP, System.getProperty(APP));
+
+        if (ObjectUtils.anyNull(getPropertyValue(String.join(BS_SUFFIX, DEVICE_NAME)),
+                getPropertyValue(String.join(BS_SUFFIX, OS_VERSION)))) {
+            BrowserStackDevices device = BrowserStackDevices.getRandomDevice();
+            options.setCapability(DEVICE_NAME, device.getDeviceName());
+            options.setCapability(OS_VERSION, device.getOsVersion());
+        }
     }
 }
