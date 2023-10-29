@@ -23,14 +23,14 @@ public class MobileDriverManager {
     }
 
     public static void setMobileDriver() {
-        Capabilities capabilities = new Capabilities();
-        BaseOptions<?> options = capabilities.loadAppiumOptions();
+        SetCapabilities setCapabilities = new SetCapabilities();
+        BaseOptions<?> options = setCapabilities.loadAppiumOptions();
         AutomationLogger.logInfo("Automatización corriendo en {0}", PLATFORM.toUpperCase(Locale.ROOT));
 
-        String url = capabilities.getAppiumHub();
+        String url = setCapabilities.getAppiumHub();
         try {
             driver = new AppiumDriver(new URL(url), options);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(capabilities.getImplicitWaitOnSeconds()));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(setCapabilities.getImplicitWaitOnSeconds()));
         } catch (Exception exception) {
             throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);
         }

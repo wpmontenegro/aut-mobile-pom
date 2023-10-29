@@ -8,18 +8,20 @@ import java.util.Set;
 
 import static com.mobile.integrations.driver.BrowserStackDriver.isActiveBrowserStack;
 import static com.mobile.integrations.driver.BrowserStackDriver.setBrowserStackDriver;
+import static com.mobile.integrations.driver.CapabilityType.AUTOMATION_NAME;
 import static com.mobile.integrations.driver.DefaultDriver.setDefaultDriver;
 import static com.mobile.util.Constants.*;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 import static io.appium.java_client.remote.MobilePlatform.IOS;
+import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 
-public class Capabilities {
+public class SetCapabilities {
     private static String appiumHub;
     private static Long implicitWaitOnSeconds;
 
-    public Capabilities() {
+    public SetCapabilities() {
         MobileProperties.loadAllProperties();
     }
 
@@ -61,11 +63,11 @@ public class Capabilities {
     private void setPlatformSpecificCapabilities(BaseOptions<?> options) {
         String platform = PLATFORM.toLowerCase();
         if (platform.equalsIgnoreCase(ANDROID)) {
-            options.setCapability("automationName", ANDROID_UIAUTOMATOR2);
-            options.setCapability("platformName", ANDROID);
+            options.setCapability(AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
+            options.setCapability(PLATFORM_NAME, ANDROID);
         } else if (platform.equalsIgnoreCase(IOS)) {
-            options.setCapability("automationName", IOS_XCUI_TEST);
-            options.setCapability("platformName", IOS);
+            options.setCapability(AUTOMATION_NAME, IOS_XCUI_TEST);
+            options.setCapability(PLATFORM_NAME, IOS);
         } else {
             throw new AutomationException("Plataforma mobile no soportada");
         }

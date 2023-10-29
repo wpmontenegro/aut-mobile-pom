@@ -2,8 +2,8 @@ package com.mobile.integrations.driver;
 
 import com.mobile.util.MobileProperties;
 
-import static com.mobile.integrations.driver.Capabilities.setAppiumHub;
-import static com.mobile.integrations.driver.Capabilities.setImplicitWaitOnSeconds;
+import static com.mobile.integrations.driver.SetCapabilities.setAppiumHub;
+import static com.mobile.integrations.driver.SetCapabilities.setImplicitWaitOnSeconds;
 
 public class DefaultDriver {
 
