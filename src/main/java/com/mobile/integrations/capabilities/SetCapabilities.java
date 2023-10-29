@@ -42,14 +42,14 @@ public class SetCapabilities {
     }
 
     public BaseOptions<?> loadAppiumOptions() {
-        BaseOptions<?> options = initializeBaseOptions();
+        BaseOptions<?> options = initializeBaseCapabilities();
         setPlatformSpecificCapabilities(options);
         setDefaultDriver();
         if(isActiveBrowserStack()) setBrowserStackDriver(options);
         return options;
     }
 
-    private BaseOptions<?> initializeBaseOptions() {
+    private BaseOptions<?> initializeBaseCapabilities() {
         BaseOptions<?> options = new BaseOptions<>();
         Set<String> propertyNames = MobileProperties.getPropertyNames();
         for (String propertyName : propertyNames) {
