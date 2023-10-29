@@ -1,6 +1,5 @@
 package com.mobile.integrations;
 
-import com.mobile.integrations.driver.MobileDriverManager;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 

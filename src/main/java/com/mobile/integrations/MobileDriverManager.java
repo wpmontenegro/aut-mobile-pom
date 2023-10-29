@@ -1,4 +1,4 @@
-package com.mobile.integrations.driver;
+package com.mobile.integrations;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.integrations.capabilities.SetCapabilities;

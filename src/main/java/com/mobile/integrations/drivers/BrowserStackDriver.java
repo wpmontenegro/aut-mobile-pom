@@ -1,4 +1,4 @@
-package com.mobile.integrations.driver;
+package com.mobile.integrations.drivers;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.util.BrowserStackDevices;
@@ -11,8 +11,8 @@ import static com.mobile.integrations.capabilities.CapabilityType.*;
 import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.util.Constants.BS_SUFFIX;
 import static com.mobile.util.Constants.EMPTY;
-import static com.mobile.util.MobileProperties.getPropertyNames;
-import static com.mobile.util.MobileProperties.getPropertyValue;
+import static com.mobile.integrations.properties.MobileProperties.getPropertyNames;
+import static com.mobile.integrations.properties.MobileProperties.getPropertyValue;
 
 public class BrowserStackDriver {
     private static final String BROWSERSTACK_FORMAT = "browserstack.%s";

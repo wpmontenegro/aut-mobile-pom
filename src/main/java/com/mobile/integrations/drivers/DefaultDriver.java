@@ -1,6 +1,6 @@
-package com.mobile.integrations.driver;
+package com.mobile.integrations.drivers;
 
-import com.mobile.util.MobileProperties;
+import com.mobile.integrations.properties.MobileProperties;
 
 import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.integrations.capabilities.SetCapabilities.setImplicitWaitOnSeconds;

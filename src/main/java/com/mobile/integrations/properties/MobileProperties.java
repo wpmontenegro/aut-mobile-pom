@@ -1,4 +1,4 @@
-package com.mobile.util;
+package com.mobile.integrations.properties;
 
 import com.mobile.exceptions.AutomationException;
 

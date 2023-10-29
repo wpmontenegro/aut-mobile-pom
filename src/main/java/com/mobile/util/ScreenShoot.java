@@ -1,6 +1,6 @@
 package com.mobile.util;
 
-import com.mobile.integrations.driver.MobileDriverManager;
+import com.mobile.integrations.MobileDriverManager;
 import org.openqa.selenium.OutputType;
 
 import static com.mobile.integrations.ManageScenario.getScenario;

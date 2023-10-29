@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Locale;
 
-import static com.mobile.integrations.driver.MobileDriverManager.getDriver;
+import static com.mobile.integrations.MobileDriverManager.getDriver;
 
 public class Gestures {
     private static void performScroll(int startX, int startY, int endX, int endY, int speed) {
