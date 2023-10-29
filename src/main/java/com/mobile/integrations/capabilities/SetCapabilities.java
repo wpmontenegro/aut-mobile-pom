@@ -6,7 +6,6 @@ import io.appium.java_client.remote.options.BaseOptions;
 
 import java.util.Set;
 
-import static com.mobile.integrations.drivers.BrowserStackDriver.isActiveBrowserStack;
 import static com.mobile.integrations.drivers.BrowserStackDriver.setBrowserStackDriver;
 import static com.mobile.integrations.capabilities.CapabilityType.AUTOMATION_NAME;
 import static com.mobile.integrations.drivers.DefaultDriver.setDefaultDriver;
@@ -45,7 +44,7 @@ public class SetCapabilities {
         BaseOptions<?> options = initializeBaseCapabilities();
         setPlatformSpecificCapabilities(options);
         setDefaultDriver();
-        if(isActiveBrowserStack()) setBrowserStackDriver(options);
+        setBrowserStackDriver(options);
         return options;
     }
 
