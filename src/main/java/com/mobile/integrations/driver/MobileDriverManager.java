@@ -1,6 +1,7 @@
 package com.mobile.integrations.driver;
 
 import com.mobile.exceptions.AutomationException;
+import com.mobile.integrations.capabilities.SetCapabilities;
 import com.mobile.logs.AutomationLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.options.BaseOptions;

@@ -1,4 +1,4 @@
-package com.mobile.integrations.driver;
+package com.mobile.integrations.capabilities;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.util.MobileProperties;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static com.mobile.integrations.driver.BrowserStackDriver.isActiveBrowserStack;
 import static com.mobile.integrations.driver.BrowserStackDriver.setBrowserStackDriver;
-import static com.mobile.integrations.driver.CapabilityType.AUTOMATION_NAME;
+import static com.mobile.integrations.capabilities.CapabilityType.AUTOMATION_NAME;
 import static com.mobile.integrations.driver.DefaultDriver.setDefaultDriver;
 import static com.mobile.util.Constants.*;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;

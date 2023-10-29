@@ -1,0 +1,8 @@
+package com.mobile.integrations.capabilities;
+
+public class CapabilityType {
+    public static String AUTOMATION_NAME = "automationName";
+    public static String APP = "app";
+    public static String BUILD_NAME = "buildName";
+    public static String PROJECT_NAME = "projectName";
+}

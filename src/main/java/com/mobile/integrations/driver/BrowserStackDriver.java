@@ -6,8 +6,8 @@ import io.appium.java_client.remote.options.BaseOptions;
 
 import java.util.Set;
 
-import static com.mobile.integrations.driver.SetCapabilities.setAppiumHub;
-import static com.mobile.integrations.driver.CapabilityType.APP;
+import static com.mobile.integrations.capabilities.CapabilityType.*;
+import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.util.Constants.BS_SUFFIX;
 import static com.mobile.util.Constants.EMPTY;
 import static com.mobile.util.MobileProperties.getPropertyNames;
@@ -47,6 +47,8 @@ public class BrowserStackDriver {
                 options.setCapability(propertyName.replace(BS_SUFFIX, EMPTY), MobileProperties.getPropertyValue(propertyName));
             }
         }
-        options.setCapability(APP, System.getProperty("app"));
+        options.setCapability(BUILD_NAME, System.getProperty(BUILD_NAME));
+        options.setCapability(PROJECT_NAME, System.getProperty(PROJECT_NAME));
+        options.setCapability(APP, System.getProperty(APP));
     }
 }
