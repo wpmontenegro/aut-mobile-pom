@@ -10,8 +10,6 @@ import java.time.Duration;
 import java.util.Locale;
 
 import static com.mobile.util.Constants.PLATFORM;
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 import static io.appium.java_client.remote.MobilePlatform.IOS;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
@@ -26,18 +24,7 @@ public class MobileDriverManager {
 
     public static void setMobileDriver() {
         Capabilities capabilities = new Capabilities();
-        BaseOptions<?> options = capabilities.getAppiumOptions();
-
-        String platform = PLATFORM.toLowerCase();
-        if (platform.equalsIgnoreCase(ANDROID)) {
-            options.setCapability("automationName", ANDROID_UIAUTOMATOR2);
-            options.setCapability("platformName", ANDROID);
-        } else if (platform.equalsIgnoreCase(IOS)) {
-            options.setCapability("automationName", IOS_XCUI_TEST);
-            options.setCapability("platformName", IOS);
-        } else {
-            throw new AutomationException("Plataforma mobile no soportada");
-        }
+        BaseOptions<?> options = capabilities.loadAppiumOptions();
         AutomationLogger.logInfo("Automatización corriendo en {0}", PLATFORM.toUpperCase(Locale.ROOT));
 
         try {
