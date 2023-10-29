@@ -2,7 +2,7 @@ package com.mobile.integrations;
 
 import com.mobile.exceptions.AutomationException;
 import com.mobile.util.MobileProperties;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import io.appium.java_client.remote.options.BaseOptions;
 
 import java.util.Set;
 
@@ -36,14 +36,14 @@ public class Capabilities {
         return properties.getPropertyValue(String.format(DRIVER_SUFFIX, HUB_PROPERTY));
     }
 
-    public DesiredCapabilities getAppiumProperties() {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+    public BaseOptions<?> getAppiumOptions() {
+        BaseOptions<?> options = new BaseOptions<>();
         Set<String> propertyNames = properties.getProperty().stringPropertyNames();
         for (String propertyName : propertyNames) {
             if (propertyName.startsWith(APPIUM_SUFFIX)) {
-                desiredCapabilities.setCapability(propertyName.replace(APPIUM_SUFFIX, EMPTY), properties.getPropertyValue(propertyName));
+                options.setCapability(propertyName.replace(APPIUM_SUFFIX, EMPTY), properties.getPropertyValue(propertyName));
             }
         }
-        return desiredCapabilities;
+        return options;
     }
 }

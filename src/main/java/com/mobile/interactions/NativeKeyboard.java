@@ -20,6 +20,5 @@ public class NativeKeyboard {
                 getDriver().findElement(By.xpath(String.format(XPATH_IOS, d))).click();
             }
         }
-
     }
 }

@@ -3,7 +3,7 @@ package com.mobile.integrations;
 import com.mobile.exceptions.AutomationException;
 import com.mobile.logs.AutomationLogger;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import io.appium.java_client.remote.options.BaseOptions;
 
 import java.net.URL;
 import java.time.Duration;
@@ -26,22 +26,22 @@ public class MobileDriverManager {
 
     public static void setMobileDriver() {
         Capabilities capabilities = new Capabilities();
-        DesiredCapabilities desiredCapabilities = capabilities.getAppiumProperties();
+        BaseOptions<?> options = capabilities.getAppiumOptions();
 
         String platform = PLATFORM.toLowerCase();
         if (platform.equalsIgnoreCase(ANDROID)) {
-            desiredCapabilities.setCapability("automationName", ANDROID_UIAUTOMATOR2);
-            desiredCapabilities.setCapability("platformName", ANDROID);
+            options.setCapability("automationName", ANDROID_UIAUTOMATOR2);
+            options.setCapability("platformName", ANDROID);
         } else if (platform.equalsIgnoreCase(IOS)) {
-            desiredCapabilities.setCapability("automationName", IOS_XCUI_TEST);
-            desiredCapabilities.setCapability("platformName", IOS);
+            options.setCapability("automationName", IOS_XCUI_TEST);
+            options.setCapability("platformName", IOS);
         } else {
             throw new AutomationException("Plataforma mobile no soportada");
         }
         AutomationLogger.logInfo("Automatización corriendo en {0}", PLATFORM.toUpperCase(Locale.ROOT));
 
         try {
-            driver = new AppiumDriver(new URL(capabilities.getAppiumHub()), desiredCapabilities);
+            driver = new AppiumDriver(new URL(capabilities.getAppiumHub()), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(capabilities.getImplicitWaitOnSeconds()));
         } catch (Exception exception) {
             throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);
