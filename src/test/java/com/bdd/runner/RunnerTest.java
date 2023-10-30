@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"json:target/cucumber-report/cucumber.json", "html:target/cucumber-report/HTML/cucumber.html"},
+        plugin = {"json:target/cucumber-report/cucumber.json", "html:target/cucumber-report/HTML/cucumber.html", "com.mobile.reports.TestReportListener"},
         glue = {"com.bdd.hooks", "com.bdd.glue"},
         features = "src/test/resources",
         stepNotifications = true,

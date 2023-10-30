@@ -3,6 +3,7 @@ package com.mobile.integrations;
 import com.mobile.exceptions.AutomationException;
 import com.mobile.integrations.capabilities.SetCapabilities;
 import com.mobile.logs.AutomationLogger;
+import com.mobile.util.MobileUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.options.BaseOptions;
 
@@ -11,9 +12,6 @@ import java.time.Duration;
 import java.util.Locale;
 
 import static com.mobile.util.Constants.PLATFORM;
-import static io.appium.java_client.remote.MobilePlatform.IOS;
-import static io.appium.java_client.remote.MobilePlatform.ANDROID;
-import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 
 public class MobileDriverManager {
 
@@ -32,6 +30,7 @@ public class MobileDriverManager {
         try {
             driver = new AppiumDriver(new URL(url), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(setCapabilities.getImplicitWaitOnSeconds()));
+            MobileUtils.setSessionId(driver.getSessionId());
         } catch (Exception exception) {
             throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);
         }
@@ -41,13 +40,5 @@ public class MobileDriverManager {
     public static void quitDriver() {
         if (getDriver() != null)
             driver.quit();
-    }
-
-    public static boolean isAndroid() {
-        return getDriver().getCapabilities().getCapability(PLATFORM_NAME).toString().equalsIgnoreCase(ANDROID);
-    }
-
-    public static boolean isIOS() {
-        return getDriver().getCapabilities().getCapability(PLATFORM_NAME).toString().equalsIgnoreCase(IOS);
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static com.mobile.integrations.MobileDriverManager.*;
+import static com.mobile.util.MobileUtils.*;
 
 public class HomeView extends MobileBase {
 

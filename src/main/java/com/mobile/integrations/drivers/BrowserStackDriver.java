@@ -1,6 +1,7 @@
 package com.mobile.integrations.drivers;
 
 import com.mobile.exceptions.AutomationException;
+import com.mobile.reports.BrowserStackTestReport;
 import com.mobile.util.BrowserStackDevices;
 import io.appium.java_client.remote.options.BaseOptions;
 import org.apache.commons.lang3.ObjectUtils;
@@ -31,7 +32,7 @@ public class BrowserStackDriver {
         return System.getenv("BROWSERSTACK_USER") != null ? System.getenv("BROWSERSTACK_USER") : userFromProperties;
     }
 
-    private static String getAccessKey() {
+    public static String getAccessKey() {
         String keyFromProperties = getPropertyValue(String.format(BROWSERSTACK_FORMAT, "key"));
         return System.getenv("BROWSERSTACK_KEY") != null ? System.getenv("BROWSERSTACK_KEY") : keyFromProperties;
     }
@@ -59,6 +60,12 @@ public class BrowserStackDriver {
                 options.setCapability(DEVICE_NAME, device.getDeviceName());
                 options.setCapability(OS_VERSION, device.getOsVersion());
             }
+        }
+    }
+
+    public static void setTestResults(){
+        if (isActive()) {
+            BrowserStackTestReport.updateReport();
         }
     }
 }
