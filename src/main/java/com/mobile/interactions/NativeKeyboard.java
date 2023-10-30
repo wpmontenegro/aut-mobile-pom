@@ -6,7 +6,7 @@ import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 
 import static com.mobile.integrations.MobileDriverManager.getDriver;
-import static com.mobile.integrations.MobileDriverManager.isAndroid;
+import static com.mobile.util.MobileUtils.isAndroid;
 
 public class NativeKeyboard {
     private static final String XPATH_IOS = "//XCUIElementTypeKey[@name='%s']";
