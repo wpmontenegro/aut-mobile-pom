@@ -36,6 +36,7 @@ public class TestReportListener implements ConcurrentEventListener {
     }
 
     private void handleTestCaseFinished(TestCaseFinished event) {
+        setErrorMessage(EMPTY);
         if(ManageScenario.getScenario().isFailed()){
             setErrorMessage(event.getResult().getError().toString());
         }
