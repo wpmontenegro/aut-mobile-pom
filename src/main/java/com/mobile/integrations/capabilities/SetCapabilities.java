@@ -6,8 +6,8 @@ import io.appium.java_client.remote.options.BaseOptions;
 
 import java.util.Set;
 
-import static com.mobile.integrations.drivers.BrowserStackDriver.setBrowserStackDriver;
 import static com.mobile.integrations.capabilities.CapabilityType.AUTOMATION_NAME;
+import static com.mobile.integrations.drivers.BrowserStackDriver.setBrowserStackDriver;
 import static com.mobile.integrations.drivers.DefaultDriver.setDefaultDriver;
 import static com.mobile.util.Constants.*;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;

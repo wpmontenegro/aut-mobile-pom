@@ -7,8 +7,9 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static com.mobile.integrations.MobileDriverManager.*;
-import static com.mobile.util.MobileUtils.*;
+import static com.mobile.integrations.MobileDriverManager.getDriver;
+import static com.mobile.util.MobileUtils.isAndroid;
+import static com.mobile.util.MobileUtils.isIOS;
 
 public class HomeView extends MobileBase {
 

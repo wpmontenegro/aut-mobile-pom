@@ -1,14 +1,13 @@
 package com.mobile.util;
 
 import com.mobile.exceptions.AutomationException;
-import org.apache.commons.lang3.RandomUtils;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.mobile.util.Constants.PLATFORM;
-import static io.appium.java_client.remote.MobilePlatform.IOS;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
 
 public enum BrowserStackDevices {
     SAMSUNG_GALAXY_S23_ULTRA("Samsung Galaxy S23 Ultra ", "13.0", ANDROID),
@@ -45,7 +44,7 @@ public enum BrowserStackDevices {
         if (devices.isEmpty()){
             throw new AutomationException("No hay dispositivos disponibles en la plataforma especificada");
         }
-        int randomIndex = RandomUtils.nextInt(0, devices.size());
+        int randomIndex = GenerateData.randomInteger(0, devices.size());
         return devices.get(randomIndex);
     }
 }

@@ -15,7 +15,7 @@ public class DemoAppStep {
         } catch (Exception e) {
             throw new AutomationException("No se ha encontrado el producto", e);
         }
-        DataManager.getInstance().getTestData().put(PRODUCT_NAME, productName);
+        DataManager.getInstance().getData().put(PRODUCT_NAME, productName);
     }
 
     public static void addToCart() {
@@ -24,7 +24,7 @@ public class DemoAppStep {
     }
 
     public static boolean getProductName() {
-        return myCartView().getProductLabel().equalsIgnoreCase(DataManager.getInstance().getTestData().get(PRODUCT_NAME));
+        return myCartView().getProductLabel().equalsIgnoreCase(DataManager.getInstance().getData().get(PRODUCT_NAME));
     }
 
     public static void removeProduct() {

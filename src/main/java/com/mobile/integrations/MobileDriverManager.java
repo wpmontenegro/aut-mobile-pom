@@ -5,6 +5,7 @@ import com.mobile.integrations.capabilities.SetCapabilities;
 import com.mobile.logs.AutomationLogger;
 import com.mobile.util.MobileUtils;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.options.BaseOptions;
 
 import java.net.URL;
@@ -24,7 +25,7 @@ public class MobileDriverManager {
     public static void setMobileDriver() {
         SetCapabilities setCapabilities = new SetCapabilities();
         BaseOptions<?> options = setCapabilities.loadAppiumOptions();
-        AutomationLogger.logInfo("Automatización corriendo en {0}", PLATFORM.toUpperCase(Locale.ROOT));
+        AutomationLogger.logInfo("Automatización ejecutándose en {0}", PLATFORM.toUpperCase(Locale.ROOT));
 
         String url = setCapabilities.getAppiumHub();
         try {

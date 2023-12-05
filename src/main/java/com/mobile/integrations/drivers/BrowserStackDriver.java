@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Set;
 
+import static com.mobile.integrations.ManageScenario.getScenario;
 import static com.mobile.integrations.capabilities.CapabilityType.*;
 import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.integrations.properties.MobileProperties.*;
@@ -53,6 +54,7 @@ public class BrowserStackDriver {
             options.setCapability(BUILD_NAME, System.getProperty(BUILD_NAME));
             options.setCapability(PROJECT_NAME, System.getProperty(PROJECT_NAME));
             options.setCapability(APP, System.getProperty(APP));
+            options.setCapability(SESSION_NAME, getScenario().getName());
 
             if (ObjectUtils.anyNull(getPropertyValue(String.join(BS_SUFFIX, DEVICE_NAME)),
                     getPropertyValue(String.join(BS_SUFFIX, OS_VERSION)))) {

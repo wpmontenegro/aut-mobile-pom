@@ -1,11 +1,6 @@
 package com.mobile.util;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.SessionId;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static com.mobile.integrations.MobileDriverManager.getDriver;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;

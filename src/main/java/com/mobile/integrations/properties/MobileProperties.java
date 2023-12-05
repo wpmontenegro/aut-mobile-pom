@@ -38,12 +38,10 @@ public class MobileProperties {
     }
 
     public static String getPropertyValue(String key) {
-        checkPropertiesLoad();
         return properties.getProperty(key, null);
     }
 
     public static boolean getBooleanPropertyValue(String key) {
-        checkPropertiesLoad();
         return Boolean.parseBoolean((properties.getProperty(key, Boolean.toString(false))));
     }
 

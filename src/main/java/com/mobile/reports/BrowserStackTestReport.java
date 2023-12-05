@@ -1,16 +1,17 @@
 package com.mobile.reports;
 
 import com.mobile.exceptions.AutomationException;
+import com.mobile.logs.AutomationLogger;
 import com.mobile.util.GenerateData;
 import com.mobile.util.MobileUtils;
-import com.mobile.logs.AutomationLogger;
 import io.cucumber.plugin.event.Status;
-import org.junit.Assert;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 import static com.mobile.integrations.ManageScenario.getScenario;
 import static com.mobile.integrations.drivers.BrowserStackDriver.getAccessKey;
@@ -22,37 +23,33 @@ public class BrowserStackTestReport {
 
     private static final String BS_SESSION_URL = "https://api-cloud.browserstack.com/app-automate/sessions/%s.json";
 
-    private static URL getSessionURI() {
-        URL uri = null;
+    private static URI getSessionURI() {
+        URI uri = null;
         String sessionId = MobileUtils.getSessionId();
         try {
-            uri = new URL(String.format(BS_SESSION_URL, sessionId));
-        } catch (MalformedURLException e) {
+            uri = new URI(String.format(BS_SESSION_URL, sessionId));
+        } catch (URISyntaxException e) {
             AutomationLogger.throwing("getSessionURI", e);
         }
         return uri;
     }
 
     public static void updateReport() {
-        String jsonBody = "{\"status\": \"" + getCompatibleStatus(getStatus()) + "\", \"reason\": \"" + getErrorMessage() + "\", \"name\": \"" + getScenario().getName() + "\"}";
-        AutomationLogger.logInfo(jsonBody);
-        URL url = getSessionURI();
-        HttpURLConnection connection;
+        HttpClient httpClient = HttpClient.newHttpClient();
+        String requestBody = String.format("{\"status\": \"%s\", \"reason\": \"%s\", \"name\": \"%s\"}",
+                getCompatibleStatus(getStatus()), getErrorMessage(), getScenario().getName());
+        String authBase64 = GenerateData.base64(String.format("%s:%s", getUser(), getAccessKey()));
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(getSessionURI())
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Basic " + authBase64)
+                .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
         try {
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("PUT");
-            connection.setRequestProperty("Content-Type", "application/json");
-            String authBase64 = GenerateData.base64(String.format("%s:%s", getUser(), getAccessKey()));
-            connection.setRequestProperty("Authorization", "Basic " + authBase64);
-            connection.setDoOutput(true);
-            OutputStream os = connection.getOutputStream();
-            byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-            Assert.assertEquals(connection.getResponseCode(), 200);
-        } catch (IOException e) {
+            httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
             throw new AutomationException("Ha ocurrido un error al subir el estado del test a BrowserStack", e);
         }
-        connection.disconnect();
     }
 
     private static String getCompatibleStatus(Status status) {
