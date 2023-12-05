@@ -8,7 +8,7 @@ public class Wait {
         try {
             Thread.sleep(timeOnSeconds * 1000L);
         } catch (InterruptedException e) {
-            AutomationLogger.throwing("forSeconds", e);
+            AutomationLogger.error("forSeconds", e);
         }
     }
 }

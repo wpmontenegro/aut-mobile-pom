@@ -12,6 +12,6 @@ public class ProductView extends MobileBase {
     private WebElement addToCartButton;
 
     public void tapAddToCart() {
-        addToCartButton.click();
+        tapElement(addToCartButton, 15);
     }
 }

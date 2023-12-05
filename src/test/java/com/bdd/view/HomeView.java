@@ -23,9 +23,9 @@ public class HomeView extends MobileBase {
     public void tapProduct(String productName) {
         Gestures.scrollByDirectionInRect(scrollView, "down", 0.25);
         if (isAndroid()) {
-            getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_ANDROID, productName))).click();
+            tapElement(getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_ANDROID, productName))));
         } else if (isIOS()) {
-            getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_IOS, productName))).click();
+            tapElement(getDriver().findElement(By.xpath(String.format(XPATH_PRODUCT_IOS, productName))));
         }
     }
 }

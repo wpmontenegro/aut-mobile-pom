@@ -16,10 +16,10 @@ public class MyCartView extends MobileBase {
     private WebElement removeItemButton;
 
     public String getProductLabel(){
-        return productLabel.getText();
+        return getText(productLabel);
     }
 
     public void tapRemoveItem(){
-        removeItemButton.click();
+        tapElement(removeItemButton);
     }
 }

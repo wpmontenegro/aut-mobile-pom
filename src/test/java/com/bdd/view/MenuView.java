@@ -12,6 +12,6 @@ public class MenuView extends MobileBase {
     private WebElement cartMenu;
 
     public void tapCartMenu(){
-        cartMenu.click();
+        tapElement(cartMenu);
     }
 }

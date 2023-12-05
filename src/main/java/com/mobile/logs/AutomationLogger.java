@@ -15,11 +15,11 @@ public class AutomationLogger {
         LOGGER.log(Level.INFO, message, param);
     }
 
-    public static void logWarning(String message) {
+    public static void warning(String message) {
         LOGGER.warning(message);
     }
 
-    public static void throwing(String method, Throwable thrown) {
+    public static void error(String method, Throwable thrown) {
         LOGGER.throwing(AutomationLogger.class.getName(), method, thrown);
     }
 }

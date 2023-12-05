@@ -5,11 +5,9 @@ import com.mobile.integrations.capabilities.SetCapabilities;
 import com.mobile.logs.AutomationLogger;
 import com.mobile.util.MobileUtils;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.options.BaseOptions;
 
 import java.net.URL;
-import java.time.Duration;
 import java.util.Locale;
 
 import static com.mobile.util.Constants.PLATFORM;
@@ -30,7 +28,7 @@ public class MobileDriverManager {
         String url = setCapabilities.getAppiumHub();
         try {
             driver = new AppiumDriver(new URL(url), options);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(setCapabilities.getImplicitWaitOnSeconds()));
+            driver.manage().timeouts().implicitlyWait(setCapabilities.getImplicitWaitOnSeconds());
             MobileUtils.setSessionId(driver.getSessionId());
         } catch (Exception exception) {
             throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);

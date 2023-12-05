@@ -29,7 +29,7 @@ public class BrowserStackTestReport {
         try {
             uri = new URI(String.format(BS_SESSION_URL, sessionId));
         } catch (URISyntaxException e) {
-            AutomationLogger.throwing("getSessionURI", e);
+            AutomationLogger.error("getSessionURI", e);
         }
         return uri;
     }

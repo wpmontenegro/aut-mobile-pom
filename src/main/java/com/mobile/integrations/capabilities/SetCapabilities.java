@@ -4,6 +4,7 @@ import com.mobile.exceptions.AutomationException;
 import com.mobile.integrations.properties.MobileProperties;
 import io.appium.java_client.remote.options.BaseOptions;
 
+import java.time.Duration;
 import java.util.Set;
 
 import static com.mobile.integrations.capabilities.CapabilityType.AUTOMATION_NAME;
@@ -18,13 +19,13 @@ import static org.openqa.selenium.remote.CapabilityType.PLATFORM_NAME;
 
 public class SetCapabilities {
     private static String appiumHub;
-    private static Long implicitWaitOnSeconds;
+    private static Duration implicitWaitOnSeconds;
 
     public SetCapabilities() {
         MobileProperties.loadAllProperties();
     }
 
-    public long getImplicitWaitOnSeconds() {
+    public Duration getImplicitWaitOnSeconds() {
         return implicitWaitOnSeconds;
     }
 
@@ -37,7 +38,7 @@ public class SetCapabilities {
     }
 
     public static void setImplicitWaitOnSeconds(Long seconds) {
-        implicitWaitOnSeconds = seconds;
+        implicitWaitOnSeconds = Duration.ofSeconds(seconds);
     }
 
     public BaseOptions<?> loadAppiumOptions() {
