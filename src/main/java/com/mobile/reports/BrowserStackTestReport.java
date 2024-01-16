@@ -13,7 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static com.mobile.integrations.ManageScenario.getScenario;
+import static com.mobile.integrations.scenario.ManageScenario.getScenario;
 import static com.mobile.integrations.drivers.BrowserStackDriver.getAccessKey;
 import static com.mobile.integrations.drivers.BrowserStackDriver.getUser;
 import static com.mobile.reports.TestReportListener.getErrorMessage;

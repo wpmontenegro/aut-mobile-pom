@@ -1,6 +1,6 @@
 package com.mobile.reports;
 
-import com.mobile.integrations.ManageScenario;
+import com.mobile.integrations.scenario.ManageScenario;
 import com.mobile.integrations.drivers.BrowserStackDriver;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.EventPublisher;

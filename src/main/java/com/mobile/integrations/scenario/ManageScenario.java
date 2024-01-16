@@ -1,4 +1,4 @@
-package com.mobile.integrations;
+package com.mobile.integrations.scenario;
 
 import io.cucumber.java.Scenario;
 

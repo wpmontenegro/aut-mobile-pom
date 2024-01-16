@@ -8,7 +8,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Set;
 
-import static com.mobile.integrations.ManageScenario.getScenario;
+import static com.mobile.integrations.scenario.ManageScenario.getScenario;
 import static com.mobile.integrations.capabilities.CapabilityType.*;
 import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.integrations.properties.MobileProperties.*;
