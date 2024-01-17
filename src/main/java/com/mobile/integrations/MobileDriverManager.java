@@ -1,15 +1,17 @@
 package com.mobile.integrations;
 
 import com.mobile.exceptions.AutomationException;
-import com.mobile.integrations.capabilities.SetCapabilities;
+import com.mobile.integrations.capabilities.Capabilities;
 import com.mobile.logs.AutomationLogger;
-import com.mobile.util.MobileUtils;
+import com.mobile.reports.DataReport;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.remote.options.BaseOptions;
 
 import java.net.URL;
 import java.util.Locale;
 
+import static com.mobile.integrations.capabilities.AppiumConfiguration.getAppiumHub;
+import static com.mobile.integrations.capabilities.AppiumConfiguration.getImplicitWaitDuration;
+import static com.mobile.integrations.capabilities.Capabilities.getCapabilities;
 import static com.mobile.util.Constants.PLATFORM;
 
 public class MobileDriverManager {
@@ -21,19 +23,16 @@ public class MobileDriverManager {
     }
 
     public static void setMobileDriver() {
-        SetCapabilities setCapabilities = new SetCapabilities();
-        BaseOptions<?> options = setCapabilities.loadAppiumOptions();
-        AutomationLogger.logInfo("Automatización ejecutándose en {0}", PLATFORM.toUpperCase(Locale.ROOT));
-
-        String url = setCapabilities.getAppiumHub();
+        Capabilities.loadAppiumOptions();
+        AutomationLogger.logInfo("Automation running on {0}", PLATFORM.toUpperCase(Locale.ROOT));
         try {
-            driver = new AppiumDriver(new URL(url), options);
-            driver.manage().timeouts().implicitlyWait(setCapabilities.getImplicitWaitOnSeconds());
-            MobileUtils.setSessionId(driver.getSessionId());
+            driver = new AppiumDriver(new URL(getAppiumHub()), getCapabilities());
+            driver.manage().timeouts().implicitlyWait(getImplicitWaitDuration());
+            DataReport.setSessionId(driver.getSessionId());
         } catch (Exception exception) {
-            throw new AutomationException("Ocurrió un error al levantar el driver con la URL del servidor de Appium", exception);
+            throw new AutomationException("An error occurred while lifting the driver with the Appium server URL", exception);
         }
-        AutomationLogger.logInfo("Driver levantado con las {0}", getDriver().getCapabilities());
+        AutomationLogger.logInfo("Driver running with the capabilities {0}", getDriver().getCapabilities());
     }
 
     public static void quitDriver() {

@@ -8,10 +8,10 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.Set;
 
-import static com.mobile.integrations.scenario.ManageScenario.getScenario;
+import static com.mobile.integrations.capabilities.AppiumConfiguration.setAppiumHub;
 import static com.mobile.integrations.capabilities.CapabilityType.*;
-import static com.mobile.integrations.capabilities.SetCapabilities.setAppiumHub;
 import static com.mobile.integrations.properties.MobileProperties.*;
+import static com.mobile.integrations.scenario.ManageScenario.getScenario;
 import static com.mobile.util.Constants.BS_SUFFIX;
 import static com.mobile.util.Constants.EMPTY;
 
@@ -23,7 +23,7 @@ public class BrowserStackDriver {
         String user = getUser();
         String keyAccess = getAccessKey();
         if (user.isEmpty() || keyAccess.isEmpty()) {
-            throw new AutomationException("Te has intentado conectar a browserstack pero debes definir correctamente las credenciales");
+            throw new AutomationException("You have tried to connect to browserstack but you must define the credentials correctly");
         }
         return String.format("https://%s:%s@%s", user, keyAccess, BROWSERSTACK_HUB);
     }

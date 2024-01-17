@@ -25,7 +25,7 @@ public class Gestures {
 
     public static void scrollByDirectionInRect(WebElement scrollRect, String dir, double distance) {
         if (distance < 0 || distance > 1) {
-            throw new Error("Distancia de scroll debe estar entre 0 y 1");
+            throw new Error("Scroll distance must be between 0 and 1");
         }
         int speed = 1;
         Dimension dimension = scrollRect.getSize();

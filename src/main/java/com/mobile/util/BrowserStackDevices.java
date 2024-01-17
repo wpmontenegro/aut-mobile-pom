@@ -42,7 +42,7 @@ public enum BrowserStackDevices {
                 .filter(BrowserStackDevices -> BrowserStackDevices.getPlatform().equalsIgnoreCase(platform))
                 .toList();
         if (devices.isEmpty()){
-            throw new AutomationException("No hay dispositivos disponibles en la plataforma especificada");
+            throw new AutomationException("No devices available on the specified platform");
         }
         int randomIndex = GenerateData.randomInteger(0, devices.size());
         return devices.get(randomIndex);

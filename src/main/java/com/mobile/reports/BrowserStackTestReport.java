@@ -3,7 +3,6 @@ package com.mobile.reports;
 import com.mobile.exceptions.AutomationException;
 import com.mobile.logs.AutomationLogger;
 import com.mobile.util.GenerateData;
-import com.mobile.util.MobileUtils;
 import io.cucumber.plugin.event.Status;
 
 import java.io.IOException;
@@ -13,11 +12,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static com.mobile.integrations.scenario.ManageScenario.getScenario;
 import static com.mobile.integrations.drivers.BrowserStackDriver.getAccessKey;
 import static com.mobile.integrations.drivers.BrowserStackDriver.getUser;
-import static com.mobile.reports.TestReportListener.getErrorMessage;
-import static com.mobile.reports.TestReportListener.getStatus;
+import static com.mobile.integrations.scenario.ManageScenario.getScenario;
+import static com.mobile.reports.DataReport.*;
 
 public class BrowserStackTestReport {
 
@@ -25,7 +23,7 @@ public class BrowserStackTestReport {
 
     private static URI getSessionURI() {
         URI uri = null;
-        String sessionId = MobileUtils.getSessionId();
+        String sessionId = getSessionId();
         try {
             uri = new URI(String.format(BS_SESSION_URL, sessionId));
         } catch (URISyntaxException e) {
@@ -48,7 +46,7 @@ public class BrowserStackTestReport {
         try {
             httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
-            throw new AutomationException("Ha ocurrido un error al subir el estado del test a BrowserStack", e);
+            throw new AutomationException("An error occurred while uploading the test status to BrowserStack", e);
         }
     }
 

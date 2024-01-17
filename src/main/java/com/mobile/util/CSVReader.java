@@ -43,7 +43,7 @@ public class CSVReader {
             int randomIndex = random.nextInt(targetColumnData.size());
             return targetColumnData.get(randomIndex);
         } else {
-            throw new AutomationException("No se encontraron datos o está vacío el CSV");
+            throw new AutomationException("No data found or CSV is empty");
         }
     }
 
@@ -66,7 +66,7 @@ public class CSVReader {
         if (!targetColumnData.isEmpty()) {
             return targetColumnData.get(0);
         } else {
-            throw new AutomationException("No se encontraron datos o está vacío el CSV");
+            throw new AutomationException("No data found or CSV is empty");
         }
     }
 
@@ -76,7 +76,7 @@ public class CSVReader {
 
         InputStream inputStream = CSVReader.class.getClassLoader().getResourceAsStream(csvFilePath);
         if (inputStream == null) {
-            throw new AutomationException("No se encontrado el archivo CSV en la ruta específicada");
+            throw new AutomationException("CSV file not found in the specified path");
         }
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -130,7 +130,7 @@ public class CSVReader {
             }
         }
         if (targetColumnIndex == -1)
-            throw new AutomationException("No se encontró la columna indicada para la lectura de CSV");
+            throw new AutomationException("The indicated column was not found for CSV reading");
         return targetColumnIndex;
     }
 

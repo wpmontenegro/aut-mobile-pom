@@ -21,7 +21,7 @@ public class MobileBase {
             WebDriverWait wait = new WebDriverWait(MobileDriverManager.getDriver(), Duration.ofSeconds(seconds));
             return wait.until(ExpectedConditions.visibilityOf(element));
         } catch (WebDriverException exception) {
-            throw new AutomationException("No se puede interactuar con el elemento: " + element.toString(), exception);
+            throw new AutomationException("Cannot interact with element: " + element.toString(), exception);
         }
     }
 

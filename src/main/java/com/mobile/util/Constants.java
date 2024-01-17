@@ -9,4 +9,5 @@ public class Constants {
     public static String EMPTY = "";
     public static String PLATFORM = Objects.toString(System.getProperty("platform"), "android");
     public static final String RUTA_DATA_CSV = "data/%s";
+    public static int LIMIT_NUMBER_CHARACTERS_REPORT = 256;
 }
