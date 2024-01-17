@@ -8,7 +8,7 @@
     <artifactId>aut-mobile-pom</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Propiedades y versiones -->
+    <!-- Properties and versions -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
