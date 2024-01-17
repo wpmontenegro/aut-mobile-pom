@@ -1,7 +1,7 @@
 package com.bdd.hooks;
 
-import com.mobile.integrations.scenario.ManageScenario;
 import com.mobile.integrations.MobileDriverManager;
+import com.mobile.integrations.scenario.ManageScenario;
 import com.mobile.util.ScreenShoot;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

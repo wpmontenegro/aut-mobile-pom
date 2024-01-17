@@ -1,36 +1,14 @@
 package com.mobile.reports;
 
-import com.mobile.integrations.scenario.ManageScenario;
 import com.mobile.integrations.drivers.BrowserStackDriver;
+import com.mobile.integrations.scenario.ManageScenario;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.EventPublisher;
-import io.cucumber.plugin.event.Status;
 import io.cucumber.plugin.event.TestCaseFinished;
 
 import static com.mobile.util.Constants.EMPTY;
-import static com.mobile.util.GenerateData.limitCharacters;
 
 public class TestReportListener implements ConcurrentEventListener {
-    private static Status status;
-    private static String errorMessage;
-
-    private static void setStatus(Status status) {
-        TestReportListener.status = status;
-    }
-
-    public static Status getStatus() {
-        return status;
-    }
-
-    private void setErrorMessage(String errorMessage){
-        TestReportListener.errorMessage = limitCharacters(errorMessage, 256);
-    }
-
-    public static String getErrorMessage(){
-        if (errorMessage != null)
-            return errorMessage;
-        return EMPTY;
-    }
 
     @Override
     public void setEventPublisher(EventPublisher publisher) {
@@ -39,11 +17,11 @@ public class TestReportListener implements ConcurrentEventListener {
 
     private void handleTestCaseFinished(TestCaseFinished event) {
         if(ManageScenario.getScenario().isFailed()){
-            setErrorMessage(event.getResult().getError().toString());
+            DataReport.setErrorMessage(event.getResult().getError().toString());
         } else {
-            setErrorMessage(EMPTY);
+            DataReport.setErrorMessage(EMPTY);
         }
-        setStatus(event.getResult().getStatus());
+        DataReport.setStatus(event.getResult().getStatus());
         BrowserStackDriver.setTestResults();
     }
 }

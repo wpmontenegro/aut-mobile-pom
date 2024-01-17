@@ -22,18 +22,18 @@ public class MobileProperties {
         if (platform.equalsIgnoreCase(ANDROID) || platform.equalsIgnoreCase(IOS)){
             MobileProperties.loadPropertiesFromFile(platform);
         } else {
-            throw new AutomationException("Plataforma mobile inválida o no soportada");
+            throw new AutomationException("Invalid or unsupported mobile platform");
         }
     }
 
     private static void loadPropertiesFromFile(String propertiesFileName) {
         try (InputStream inputStream = MobileProperties.class.getClassLoader().getResourceAsStream(String.format("%s.properties", propertiesFileName))) {
             if (inputStream == null) {
-                throw new AutomationException("No se encontró la ruta de las properties");
+                throw new AutomationException("Properties path not found");
             }
             properties.load(inputStream);
         } catch (Exception e) {
-            throw new AutomationException("Error al cargar las properties: " + propertiesFileName, e);
+            throw new AutomationException("Error loading properties: " + propertiesFileName, e);
         }
     }
 
@@ -52,7 +52,7 @@ public class MobileProperties {
 
     private static void checkPropertiesLoad() {
         if (properties.isEmpty()) {
-            throw new AutomationException("Las properties no se han cargado. Llama a loadProperties primero");
+            throw new AutomationException("The properties have not been loaded. Call loadProperties() first");
         }
     }
 }

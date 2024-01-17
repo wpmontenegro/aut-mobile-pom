@@ -1,5 +1,6 @@
 package com.mobile.interactions;
 
+import com.mobile.util.Direction;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,6 @@ import org.openqa.selenium.interactions.Sequence;
 
 import java.time.Duration;
 import java.util.Collections;
-import java.util.Locale;
 
 import static com.mobile.integrations.MobileDriverManager.getDriver;
 
@@ -23,9 +23,9 @@ public class Gestures {
         getDriver().perform(Collections.singletonList(sequence));
     }
 
-    public static void scrollByDirectionInRect(WebElement scrollRect, String dir, double distance) {
+    public static void scrollByDirectionInRect(WebElement scrollRect, Direction direction, double distance) {
         if (distance < 0 || distance > 1) {
-            throw new Error("Distancia de scroll debe estar entre 0 y 1");
+            throw new Error("Scroll distance must be between 0 and 1");
         }
         int speed = 1;
         Dimension dimension = scrollRect.getSize();
@@ -35,11 +35,11 @@ public class Gestures {
         int bottom = midPoint.y + (int) ((dimension.height * 0.5) * distance);
         int left = midPoint.x - (int) ((dimension.width * 0.5) * distance);
         int right = midPoint.x + (int) ((dimension.width * 0.5) * distance);
-        switch (dir.toUpperCase(Locale.ROOT)) {
-            case "UP" -> performScroll(midPoint.x, top, midPoint.x, bottom, speed);
-            case "DOWN" -> performScroll(midPoint.x, bottom, midPoint.x, top, speed);
-            case "LEFT" -> performScroll(left, midPoint.y, right, midPoint.y, speed);
-            case "RIGHT" -> performScroll(right, midPoint.y, left, midPoint.y, speed);
+        switch (direction) {
+            case UP -> performScroll(midPoint.x, top, midPoint.x, bottom, speed);
+            case DOWN -> performScroll(midPoint.x, bottom, midPoint.x, top, speed);
+            case LEFT -> performScroll(left, midPoint.y, right, midPoint.y, speed);
+            case RIGHT -> performScroll(right, midPoint.y, left, midPoint.y, speed);
         }
     }
 }
