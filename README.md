@@ -56,7 +56,7 @@ cd aut-mobile-pom
 ### Instalación de Dependencias
 
 ```
-mvn clean install
+mvn clean install -DskipTests
 ```
 
 ## ▶️ Ejecución de pruebas
