@@ -79,6 +79,9 @@ mvn test -Dplatform={PLATFORM}
 ### Pruebas en BrowserStack (nube)
 
 1. Sube la aplicación a **BrowserStack** y verifica la configuración en el archivo `properties`.
+```
+browserstack.active:true
+```
 2. Establezca las **Credenciales de BrowserStack/SauceLabs** como variables de entorno:
 ```
 export BROWSERSTACK_USERNAME=tu_usuario
