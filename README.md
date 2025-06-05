@@ -78,8 +78,12 @@ mvn test -Dplatform={PLATFORM}
 
 ### Pruebas en BrowserStack (nube)
 
-1. Sube la aplicación a **BrowserStack/SauceLabs** y verifica la configuración del perfil `bstack` o `sauce`
-2. Establezca las **Credenciales de BrowserStack/SauceLabs** como variables de entorno: {`BROWSERSTACK_USER` y `BROWSERSTACK_KEY`} o {`SAUCE_USER` y `SAUCE_KEY`}
+1. Sube la aplicación a **BrowserStack** y verifica la configuración en el archivo `properties`.
+2. Establezca las **Credenciales de BrowserStack/SauceLabs** como variables de entorno:
+```
+export BROWSERSTACK_USERNAME=tu_usuario
+export BROWSERSTACK_ACCESS_KEY=tu_clave
+```
 3. Ejecutar las pruebas:
 ```
 mvn test -Dplatform={PLATFORM} -Dapp={APP_URL}
@@ -96,16 +100,6 @@ Specifies the mobile platform to test. Supported values:
 ```
 android (para dispositivos Android)
 ios (para dispositivos  iOS)
-```
-
-`type` (requerido):
-
-Define el tipo de driver, valores soportados:
-
-```
-local (para ejecutar pruebas en un dispositivo o emulador conectado localmente)
-bstack (para ejecutar pruebas con BrowserStack)
-sauce (para ejecutar pruebas con SauceLabs)
 ```
 
 ### Properties
