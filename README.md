@@ -76,7 +76,7 @@ appium.app:ruta_del_aplicativo
 ```
 3. Ejecutar las pruebas:
 ```
-mvn test -Dplatform={PLATFORM}
+mvn clean test -Dplatform={PLATFORM}
 ```
 
 ### Pruebas en BrowserStack (nube)
@@ -92,7 +92,7 @@ export BROWSERSTACK_ACCESS_KEY=tu_clave
 ```
 3. Ejecutar las pruebas:
 ```
-mvn test -Dplatform={PLATFORM} -Dapp={APP_URL}
+mvn clean test -Dplatform={PLATFORM} -Dapp={APP_URL}
 ```
 
 ## 🔧 Configuración
