@@ -70,7 +70,10 @@ mvn clean install -DskipTests
 ### Pruebas locales
 
 1. Iniciar el servidor de Appium en el terminal: ```appium```
-2. Descarga la app y ubícalo en el directorio: `src/test/resources/app/`
+2. Descarga la app y establece la ruta del apk dentro del archivo `properties`.
+```
+appium.app:ruta_del_aplicativo
+```
 3. Ejecutar las pruebas:
 ```
 mvn test -Dplatform={PLATFORM}
