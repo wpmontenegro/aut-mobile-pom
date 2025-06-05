@@ -1,8 +1,8 @@
-# Automation Test Mobile Android/iOS
-Framework de automatización mobile con Page Object Model usando Java + Cucumber + Maven + Junit + BrowserStack.
-El framework soporta Android y iOS.
+# Appium + POM API Automation Framework
 
----
+Framework de automatización de pruebas móviles utilizando el patrón Page Object Model (POM).
+Este proyecto está para facilitar la escritura de pruebas legibles y mantenibles.
+Además, está integrado con BrowserStack para pruebas en la nube y soporta dispositivos Android e iOS.
 
 ## 🚀 Características
 
@@ -13,20 +13,19 @@ El framework soporta Android y iOS.
 - Manejo de logs y reportes automáticos
 - Ejecución con Maven y JUnit
 
----
 
-## 🛠️ Tecnologías utilizadas
+## 🛠️ Tecnologías Utilizadas
 
-- Java 11+
-- Appium
-- Cucumber
-- Gherkin
-- Maven
-- BrowserStack
+- **Lenguaje de programación**: Java
+- **Frameworks de automatización**:
+    - [Appium](https://appium.io/)
+    - [Cucumber](https://cucumber.io/)
+    - [JUnit](https://junit.org/)
+- **Herramientas adicionales**:
+    - [Maven](https://maven.apache.org/)
+    - [BrowserStack](https://www.browserstack.com/)
 
----
-
-## 📁 Estructura del proyecto
+## 📂 Estructura del Proyecto
 
 ```
 aut-mobile-pom/
@@ -45,30 +44,95 @@ aut-mobile-pom/
 └── README.md                     # Documentación del proyecto
 ```
 
----
+## 📋 Instalación
+
+### Clonar el Repositorio
+
+```
+git clone https://github.com/wpmontenegro/aut-mobile-pom.git
+cd aut-mobile-pom
+```
+
+### Instalación de Dependencias
+
+```
+mvn clean install -DskipTests
+```
 
 ## ▶️ Ejecución de pruebas
 
-### Ejecución local
+### Prerrequisitos
 
-Asegúrate de tener Appium Server ejecutándose localmente y un emulador o dispositivo conectado.
+- Appium Server (para pruebas locales)
+- Cuenta en BrowserStack (para pruebas en la nube)
+- Descargar [**MyDemoApp**](https://github.com/saucelabs/my-demo-app-rn/releases/)
 
+### Pruebas locales
+
+1. Iniciar el servidor de Appium en el terminal: ```appium```
+2. Descarga la app y establece la ruta del apk dentro del archivo `properties`.
 ```
-mvn clean verify
+appium.app:ruta_del_aplicativo
+```
+3. Ejecutar las pruebas:
+```
+mvn test -Dplatform={PLATFORM}
 ```
 
-### Ejecución en BrowserStack (nube)
+### Pruebas en BrowserStack (nube)
 
-Para ejecutar pruebas en la nube (por ejemplo, en iOS), exporta las credenciales de BrowserStack como variables de entorno:
-
+1. Sube la aplicación a **BrowserStack** y verifica la configuración en el archivo `properties`.
+```
+browserstack.active:true
+```
+2. Establezca las **Credenciales de BrowserStack/SauceLabs** como variables de entorno:
 ```
 export BROWSERSTACK_USERNAME=tu_usuario
 export BROWSERSTACK_ACCESS_KEY=tu_clave
 ```
+3. Ejecutar las pruebas:
+```
+mvn test -Dplatform={PLATFORM} -Dapp={APP_URL}
+```
 
-Luego ejecuta las pruebas con los parámetros necesarios:
+## 🔧 Configuración
+
+### Parámetros
+
+`platform` (requerido):
+
+Specifies the mobile platform to test. Supported values:
 
 ```
-mvn clean verify -Dplatform={PLATFORM} -Dapp={CLOUD_APP}
+android (para dispositivos Android)
+ios (para dispositivos  iOS)
 ```
-🔐 Las credenciales no deben almacenarse en archivos del repositorio. Usa siempre variables de entorno para mantenerlas seguras.
+
+### Properties
+
+Este proyecto utiliza archivos `.properties` para gestionar configuraciones clave y facilitar la ejecución en distintos entornos (local, remoto, CI/CD).
+Los archivos de configuración se encuentran en:
+
+```
+src/test/resources/
+├── application.properties  # Configuraciones generales para ejecución local y en la nube con Appium
+├── android.properties      # Configuraciones para ejecución en Android
+├── ios.properties          # Configuraciones para ejecución en iOS
+```
+
+## 📊 Reportes de Pruebas
+
+Los reportes de las ejecuciones se generan automáticamente en formato HTML y se almacenan en la carpeta `target/cucumber-reports/`.
+Para visualizar un reporte:
+
+```
+open target/cucumber-reports/Cucumber.html
+```
+
+## 📬 Contacto
+
+Para preguntas o sugerencias, puedes contactarme a través de:
+
+- Correo electrónico: wmontenegro@outlook.com.pe
+- LinkedIn: [**wmontenegro**](https://www.linkedin.com/in/wmontenegro)
+- GitHub: [**wpmontenegro**](https://github.com/wpmontenegro)
