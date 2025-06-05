@@ -1,4 +1,4 @@
-# Appium + POM API Automation Framework
+# Appium + POM Mobile Automation Framework
 
 Framework de automatización de pruebas móviles utilizando el patrón Page Object Model (POM).
 Este proyecto está para facilitar la escritura de pruebas legibles y mantenibles.
