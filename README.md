@@ -101,7 +101,7 @@ mvn clean test -Dplatform={PLATFORM} -Dapp={APP_URL}
 
 `platform` (requerido):
 
-Specifies the mobile platform to test. Supported values:
+Especifica la plataforma móvil a ejecutar. Valores permitidos:
 
 ```
 android (para dispositivos Android)
