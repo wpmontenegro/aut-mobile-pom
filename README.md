@@ -85,7 +85,7 @@ mvn clean test -Dplatform={PLATFORM}
 ```
 browserstack.active:true
 ```
-2. Establezca las **Credenciales de BrowserStack/SauceLabs** como variables de entorno:
+2. Establezca las **Credenciales de BrowserStack** como variables de entorno:
 ```
 export BROWSERSTACK_USERNAME=tu_usuario
 export BROWSERSTACK_ACCESS_KEY=tu_clave
@@ -126,7 +126,7 @@ Los reportes de las ejecuciones se generan automáticamente en formato HTML y se
 Para visualizar un reporte:
 
 ```
-open target/cucumber-reports/Cucumber.html
+open target/cucumber-reports/HTML/cucumber.html
 ```
 
 ## 📬 Contacto
